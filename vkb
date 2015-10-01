@@ -1,0 +1,65 @@
+Private Sub CommandButton1_Click()
+Dim user_name As String
+Dim pass_word As String
+user_name = login_form.TextBox1
+pass_word = login_form.TextBox2
+X = 1
+Do Until ThisWorkbook.Sheets("sheet4").Cells(X, 1).Value = ""
+X = X + 1
+If (user_name = ThisWorkbook.Sheets("Sheet4").Cells(X, 1).Value Or user_name = ThisWorkbook.Sheets("Sheet4").Cells(X, 3)) _
+And pass_word = ThisWorkbook.Sheets("Sheet4").Cells(X, 2) Then
+MsgBox "Welcome to VBA Project"
+login_form.Hide
+Set login_form = Nothing
+Exit Sub
+End If
+Loop
+
+MsgBox "username or password is incorrect"
+End Sub
+
+Private Sub CommandButton2_Click()
+counter = 1
+Do Until ThisWorkbook.Sheets("sheet4").Cells(counter, 1) = ""
+counter = counter + 1
+Loop
+If login_form.TextBox3.Value = "" Or login_form.TextBox4.Value = "" Or login_form.TextBox5.Value = "" Then
+MsgBox " please fill all req details"
+Exit Sub
+
+End If
+
+ThisWorkbook.Sheets("Sheet4").Cells(counter, 1) = login_form.TextBox3.Value
+ThisWorkbook.Sheets("Sheet4").Cells(counter, 2) = login_form.TextBox4.Value
+ThisWorkbook.Sheets("Sheet4").Cells(counter, 3) = login_form.TextBox5.Value
+Dim string2 As Integer
+Dim string1 As String
+string2 = 0
+string1 = login_form.TextBox5.Value
+string2 = InStr(1, string1, "@")
+If string2 = 0 Then
+MsgBox "not a valid Email id "
+Exit Sub
+End If
+string3 = InStr(1, string1, ".")
+If string3 = 0 Then
+MsgBox "not a valid Email id "
+Exit Sub
+End If
+
+
+MsgBox "thanx for registering"
+login_form.Frame1.Visible = False
+
+End Sub
+
+Private Sub CommandButton3_Click()
+login_form.Frame1.Visible = True
+
+
+End Sub
+
+Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
+Cancel = 1
+
+End Sub
